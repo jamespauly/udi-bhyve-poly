@@ -80,7 +80,7 @@ class BHyveController(udi_interface.Node):
             pass
 
     def query(self, command=None):
-        user = self.Parameters['user']
+        user = self.Parameters['username']
         password = self.Parameters['password']
         try:
             LOGGER.info("Starting BHyve Timer Device Discovery")
