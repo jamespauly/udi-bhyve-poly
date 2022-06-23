@@ -72,7 +72,7 @@ class BHyveController(udi_interface.Node):
             self.query()
         else:
             if not userValid:
-                self.Notices['user'] = 'User must be configured.'
+                self.Notices['username'] = 'User must be configured.'
             if not passwordValid:
                 self.Notices['password'] = 'Password must be configured.'
 
