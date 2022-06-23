@@ -1,4 +1,4 @@
-# Acurite Node Server Custom Parameters
+# BHyve Node Server Custom Parameters
 
-* <b>acurite_user</b> - myacurite.com username
-* <b>acurite_password</b> - myacurite.com password
+* <b>username</b> - my.orbitbhyve.com username
+* <b>password</b> - my.orbitbhyve.com password

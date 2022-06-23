@@ -40,11 +40,7 @@ class BHyveController(udi_interface.Node):
     def start(self):
         self.poly.updateProfile()
         self.poly.setCustomParamsDoc()
-        self.query()
         LOGGER.info('Started udi-bhyve-poly NodeServer')
-
-    def nodeHandler(self, data):
-        self.nodesAddedCount += 1
 
     def parameterHandler(self, params):
         self.Parameters.load(params)
