@@ -1,0 +1,23 @@
+<editors>
+    <editor id="bool">
+        <range uom="2" subset="0,1"/>
+    </editor>
+    <editor id="I_RUN_MODE">
+        <range uom="25" subset="0,1" nls="IX_RUN_LEVEL"/>
+    </editor>
+    <editor id="I_PP">
+        <range uom="51" min="0" max="100"/>
+    </editor>
+    <editor id="I_PI">
+        <range uom="105" min="0" max="10"/>
+    </editor>
+    <editor id="I_WS">
+        <range uom="48" min="0" max="80"/>
+    </editor>
+    <editor id="I_FT_F">
+        <range uom="17" min="-80" max="80"/>
+    </editor>
+    <editor id="I_ZONES">
+        <range uom="56" min="1" max="20"/>
+    </editor>
+</editors>

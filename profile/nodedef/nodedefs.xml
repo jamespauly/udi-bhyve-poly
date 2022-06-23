@@ -1,0 +1,49 @@
+<nodeDefs>
+    <!-- NODE DEF from 5.0 document http://wiki.universal-devices.com/index.php?title=V50_MAIN -->
+    <!-- controller, this must mach the id in your Controller class-->
+    <nodeDef id="bhyve" nls="ctl">
+        <editors/>
+        <sts>
+           <st id="ST" editor="bool"/>
+        </sts>
+        <cmds>
+            <sends/>
+            <accepts>
+                <cmd id="QUERY"/>
+                <cmd id="DISCOVER"/>
+                <cmd id="REMOVE_NOTICES_ALL"/>
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <!-- Acurite Master -->
+    <nodeDef id="timernode" nls="time">
+        <editors/>
+        <sts>
+            <st id="GV7" editor="I_RUN_MODE"/>
+            <st id="GV5" editor="I_ZONES"/>
+            <st id="GV6" editor="I_ZONES"/>
+            <st id="GV1" editor="I_PP"/>
+            <st id="GV2" editor="I_PI"/>
+            <st id="GV3" editor="I_WS"/>
+            <st id="GV4" editor="I_FT_F"/>
+        </sts>
+        <cmds>
+            <sends/>
+            <accepts>
+                <cmd id="QUERY"/>
+            </accepts>
+        </cmds>
+    </nodeDef>
+    <nodeDef id="zonenode" nls="zone">
+        <editors/>
+        <sts>
+            <st id="ST" editor="bool"/>
+        </sts>
+        <cmds>
+            <sends/>
+            <accepts>
+                <!--<cmd id="QUERY"/>-->
+            </accepts>
+        </cmds>
+    </nodeDef>
+</nodeDefs>

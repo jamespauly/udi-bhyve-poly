@@ -1,0 +1,27 @@
+# controller
+ND-bhyve-NAME = BHyve NodeServer Controller
+ND-bhyve-ICON = Generic
+CMD-ctl-DISCOVER-NAME = Discover
+CMD-ctl-QUERY-NAME = Query
+CMD-ctl-REMOVE_NOTICES_ALL-NAME = Remove Notices
+ST-ctl-ST-NAME = BHyve NodeServer Online
+
+# Timer Node
+ND-timernode-NAME = BHyve Timer Node
+ND-timernode-ICON = Irrigation
+ST-timer-GV1-NAME = Precipitation Prob
+ST-timer-GV2-NAME = Precipitation In
+ST-timer-GV3-NAME = Wind Speed
+ST-timer-GV4-NAME = Freeze Temp
+ST-timer-GV5-NAME = Total Zones
+ST-timer-GV6-NAME = Active Zones
+ST-timer-GV7-NAME = Current Watering Status
+ST-timer-ST-NAME = Current Watering Status
+
+# Device Node
+ND-zonenode-NAME = BHyve Zone Node
+ND-zonenode-ICON = Irrigation
+ST-zone-ST-NAME = BHyve Timer Node
+
+IX_RUN_LEVEL-0 = On
+IX_RUN_LEVEL-1 = Off
