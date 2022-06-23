@@ -28,24 +28,28 @@ class TimerNode(udi_interface.Node):
             self.query()
         else:
             LOGGER.info('longPoll (Looking for New Nodes)')
-            device = asyncio.run(self.get_device(self.user, self.password))
+            user = self.Parameters['username']
+            password = self.Parameters['password']
+            device = asyncio.run(self.get_device(user, password))
             self.load_zones(device)
             pass
 
     def parameterHandler(self, params):
         self.Parameters.load(params)
-        self.user = self.Parameters['username']
-        self.password = self.Parameters['password']
 
     def start(self):
         LOGGER.debug("TimerNode - start")
-        device = asyncio.run(self.get_device(self.user, self.password))
+        user = self.Parameters['username']
+        password = self.Parameters['password']
+        device = asyncio.run(self.get_device(user, password))
         self.load_zones(device)
         self.update(device)
 
     def query(self):
         LOGGER.debug('TimerNode - query')
-        device = asyncio.run(self.get_device(self.user, self.password))
+        user = self.Parameters['username']
+        password = self.Parameters['password']
+        device = asyncio.run(self.get_device(user, password))
         self.update(device)
 
 
