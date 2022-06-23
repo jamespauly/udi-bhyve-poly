@@ -12,7 +12,7 @@
   "profile_version": "3.0.0",
   "devMode": true,
   "customParams": {
-    "user": "<user>",
+    "username": "<username>",
     "password": "<password>"
   },
   "credits": [
