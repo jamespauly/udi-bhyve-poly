@@ -80,10 +80,6 @@ class BHyveController(udi_interface.Node):
             pass
 
     def query(self, command=None):
-        self.discover()
-        LOGGER.info('BHyveController - query')
-
-    def discover(self, *args, **kwargs):
         user = self.Parameters['user']
         password = self.Parameters['password']
         try:
@@ -91,10 +87,12 @@ class BHyveController(udi_interface.Node):
             asyncio.run(self.load_timers(user, password))
         except Exception as ex:
             LOGGER.error("BHyveController - Discovery failed with error", ex)
+        LOGGER.info('BHyveController - query')
 
     async def load_timers(self, user, password) -> None:
         async with ClientSession() as session:
             try:
+                LOGGER.debug(f'User: {user} Password: {password}')
                 client = Client(user, password, asyncio.get_event_loop(), session, None)
                 await client.login()
                 devices = await client.devices
@@ -114,5 +112,5 @@ class BHyveController(udi_interface.Node):
         self.Notices.clear()
 
     id = 'bhyve'
-    commands = {'QUERY': query, 'REMOVE_NOTICES_ALL': remove_notices_all, 'DISCOVER': discover}
+    commands = {'QUERY': query, 'REMOVE_NOTICES_ALL': remove_notices_all}
     drivers = [{'driver': 'ST', 'value': 1, 'uom': 2}]
