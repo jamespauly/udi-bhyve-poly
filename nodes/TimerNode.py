@@ -18,6 +18,7 @@ class TimerNode(udi_interface.Node):
         self.name = name
         self.primary = primary
         self.address = address
+        self.Parameters = Custom(polyglot, 'customparams')
         self.poly.subscribe(self.poly.CUSTOMPARAMS, self.parameterHandler)
         self.poly.subscribe(self.poly.START, self.start, address)
         self.poly.subscribe(self.poly.POLL, self.poll)
