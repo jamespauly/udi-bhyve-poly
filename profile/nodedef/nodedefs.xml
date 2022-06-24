@@ -37,7 +37,9 @@
     <nodeDef id="zonenode" nls="zone">
         <editors/>
         <sts>
-            <st id="ST" editor="bool"/>
+            <st id="GV1" editor="I_ZONES"/>
+            <st id="GV2" editor="I_SPK_TYPE_MODE"/>
+            <st id="GV3" editor="bool"/>
         </sts>
         <cmds>
             <sends/>

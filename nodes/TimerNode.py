@@ -1,25 +1,18 @@
 import json
 import udi_interface
-import asyncio
-from aiohttp import ClientSession
-
-from nodes import ZoneNode
-from pybhyve import Client
-from pybhyve.errors import BHyveError
 
 LOGGER = udi_interface.LOGGER
 Custom = udi_interface.Custom
 
 class TimerNode(udi_interface.Node):
-    def __init__(self, polyglot, primary, address, name):
+    def __init__(self, polyglot, primary, address, name, device):
         super(TimerNode, self).__init__(polyglot, primary, address, name)
         LOGGER.debug("Initialize TimerNode")
         self.poly = polyglot
         self.name = name
         self.primary = primary
         self.address = address
-        self.Parameters = Custom(polyglot, 'customparams')
-        self.poly.subscribe(self.poly.CUSTOMPARAMS, self.parameterHandler)
+        self.device = device
         self.poly.subscribe(self.poly.START, self.start, address)
         self.poly.subscribe(self.poly.POLL, self.poll)
 
@@ -28,53 +21,19 @@ class TimerNode(udi_interface.Node):
             LOGGER.info('shortPoll (Updating Data)')
             self.query()
         else:
-            LOGGER.info('longPoll (Looking for New Nodes)')
-            user = self.Parameters['username']
-            password = self.Parameters['password']
-            device = asyncio.run(self.get_device(user, password))
-            self.load_zones(device)
             pass
-
-    def parameterHandler(self, params):
-        self.Parameters.load(params)
 
     def start(self):
         LOGGER.debug("TimerNode - start")
-        user = self.Parameters['username']
-        password = self.Parameters['password']
-        device = asyncio.run(self.get_device(user, password))
-        self.load_zones(device)
-        self.update(device)
+        LOGGER.info('Address of current Node ' + self.address)
+        LOGGER.debug('start ' + json.dumps(self.device))
+        self.update(self.device)
 
     def query(self):
-        LOGGER.debug('TimerNode - query')
-        user = self.Parameters['username']
-        password = self.Parameters['password']
-        device = asyncio.run(self.get_device(user, password))
-        self.update(device)
-
-
-    def load_zones(self, device) -> None:
-        for zone in device['zones']:
-            self.poly.addNode(ZoneNode(self.poly, self.address, zone['station'], zone['name']))
-            LOGGER.debug("Zone: %s", json.dumps(zone))
-
-    async def get_device(self, user, password) -> None:
-        async with ClientSession() as session:
-            try:
-                client = Client(user, password, asyncio.get_event_loop(), session, None)
-                await client.login()
-                devices = await client.devices
-                for device in devices:
-                    if device['reference'] == self.address:
-                        LOGGER.debug(f"Getting Device with Reference {device['reference']} and ID {device['id']}")
-                        return device
-            except BHyveError as err:
-                LOGGER.error("There was an error in load_timers: %s", err)
-                return None
+        self.update(self.device)
 
     def update(self, device):
-        LOGGER.debug(f'Updating device {json.dumps(device)}')
+        LOGGER.info(f'Updating device {json.dumps(device)}')
         total_zones = device['num_stations']
         active_num_of_zones = len(device['zones'])
         current_watering_status = device['status']['watering_status']

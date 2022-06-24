@@ -18,10 +18,17 @@ ST-timer-GV6-NAME = Active Zones
 ST-timer-GV7-NAME = Current Watering Status
 ST-timer-ST-NAME = Current Watering Status
 
-# Device Node
+# Zone Node
 ND-zonenode-NAME = BHyve Zone Node
 ND-zonenode-ICON = Irrigation
-ST-zone-ST-NAME = BHyve Timer Node
+ST-zone-GV1-NAME = Station Number
+ST-zone-GV2-NAME = Sprinkler Type
+ST-zone-GV3-NAME = Smart Watering Enabled
 
 IX_RUN_LEVEL-0 = On
 IX_RUN_LEVEL-1 = Off
+
+IX_SRK_TYPE_LEVEL-0 = Spray
+IX_SRK_TYPE_LEVEL-1 = Drip
+IX_SRK_TYPE_LEVEL-2 = Rotor
+IX_SRK_TYPE_LEVEL-3 = Unknown

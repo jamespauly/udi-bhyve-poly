@@ -2,12 +2,13 @@
 import time
 import json
 import asyncio
+from pprint import pprint
 
 from aiohttp import ClientSession
 
 import udi_interface
 
-from nodes import TimerNode
+from nodes import TimerNode, ZoneNode
 from pybhyve import Client
 from pybhyve.errors import BHyveError
 
@@ -97,8 +98,21 @@ class BHyveController(udi_interface.Node):
                 await client.login()
                 devices = await client.devices
                 for device in devices:
-                    self.poly.addNode(TimerNode(self.poly, self.address, device['reference'], device['name']))
+                    if self.poly.getNode(device['reference']) != None:
+                        timer_node = self.poly.getNode(device['reference'])
+                        timer_node.update(device)
+                        LOGGER.info("Custom - The Node Already Exist")
+                    else:
+                        self.poly.addNode(
+                            TimerNode(self.poly, self.address, device['reference'], device['name'], device))
                     LOGGER.info("Device: %s", json.dumps(device))
+                    for zone in device['zones']:
+                        if self.poly.getNode(zone['station']) != None:
+                            zone_node = self.poly.getNode(zone['station'])
+                            zone_node.update(zone)
+                        else:
+                            self.poly.addNode(ZoneNode(self.poly, device['reference'], zone['station'], zone['name'], zone))
+                        LOGGER.debug("Zone: %s", json.dumps(zone))
             except BHyveError as err:
                 LOGGER.error("There was an error in load_timers: %s", err)
 
