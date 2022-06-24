@@ -1,3 +1,4 @@
 udi-interface
 requests
 jsonpath-ng
+aiohttp>=3.8.1
