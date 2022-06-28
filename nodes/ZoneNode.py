@@ -2,7 +2,6 @@ import json
 import udi_interface
 
 LOGGER = udi_interface.LOGGER
-Custom = udi_interface.Custom
 
 class ZoneNode(udi_interface.Node):
     def __init__(self, polyglot, primary, address, name, zone):
@@ -14,7 +13,7 @@ class ZoneNode(udi_interface.Node):
         self.address = address
         self.zone = zone
         self.poly.subscribe(self.poly.START, self.start, address)
-        self.poly.subscribe(self.poly.POLL, self.poll)
+        self.id = 'zonenode'
 
     def poll(self, pollType):
         if 'shortPoll' in pollType:
@@ -50,8 +49,6 @@ class ZoneNode(udi_interface.Node):
         self.setDriver('GV1', station, True)
         self.setDriver('GV2', sprinker_type_idx, True)
         self.setDriver('GV3', smart_watering_enabled, True)
-
-    id = 'zonenode'
 
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': '56'},
                {'driver': 'GV2', 'value': 0, 'uom': '25'},

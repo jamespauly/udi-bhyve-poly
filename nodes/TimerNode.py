@@ -2,7 +2,6 @@ import json
 import udi_interface
 
 LOGGER = udi_interface.LOGGER
-Custom = udi_interface.Custom
 
 class TimerNode(udi_interface.Node):
     def __init__(self, polyglot, primary, address, name, device):
@@ -13,8 +12,8 @@ class TimerNode(udi_interface.Node):
         self.primary = primary
         self.address = address
         self.device = device
-        self.poly.subscribe(self.poly.START, self.start, address)
-        self.poly.subscribe(self.poly.POLL, self.poll)
+        self.poly.subscribe(polyglot.START, self.start, address)
+        self.id = 'timernode'
 
     def poll(self, pollType):
         if 'shortPoll' in pollType:
@@ -49,8 +48,6 @@ class TimerNode(udi_interface.Node):
         self.setDriver('GV5', total_zones, True)
         self.setDriver('GV6', active_num_of_zones, True)
         self.setDriver('GV7', current_watering_status, True)
-
-    id = 'timernode'
 
     drivers = [{'driver': 'GV1', 'value': 0, 'uom': '51'},
                {'driver': 'GV2', 'value': 0, 'uom': '105'},

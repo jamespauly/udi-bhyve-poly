@@ -1,8 +1,6 @@
 # !/usr/bin/env python
-import time
 import json
 import asyncio
-from pprint import pprint
 
 from aiohttp import ClientSession
 
@@ -26,6 +24,7 @@ class BHyveController(udi_interface.Node):
         self.configured = False
         self.nodesAddedCount = 0
         self.deviceCount = 0
+        self.id = 'bhyve'
 
         self.Notices = Custom(polyglot, 'notices')
         self.Parameters = Custom(polyglot, 'customparams')
@@ -35,7 +34,7 @@ class BHyveController(udi_interface.Node):
         self.poly.subscribe(self.poly.POLL, self.poll)
 
         self.poly.ready()
-        self.poly.addNode(self)
+        self.poly.addNode(self, conn_status="ST")
 
     def start(self):
         self.poly.updateProfile()
@@ -101,17 +100,20 @@ class BHyveController(udi_interface.Node):
                     if self.poly.getNode(device['reference']) != None:
                         timer_node = self.poly.getNode(device['reference'])
                         timer_node.update(device)
-                        LOGGER.info("Custom - The Node Already Exist")
+                        LOGGER.info("TimerNode - The Node Already Exist - Updating")
                     else:
                         self.poly.addNode(
                             TimerNode(self.poly, self.address, device['reference'], device['name'], device))
+                        LOGGER.info("TimerNode - Adding Node")
                     LOGGER.info("Device: %s", json.dumps(device))
                     for zone in device['zones']:
                         if self.poly.getNode(zone['station']) != None:
                             zone_node = self.poly.getNode(zone['station'])
                             zone_node.update(zone)
+                            LOGGER.info("ZoneNode - The Node Already Exist - Updating")
                         else:
                             self.poly.addNode(ZoneNode(self.poly, device['reference'], 'station' + str(zone['station']), zone['name'], zone))
+                            LOGGER.info("ZoneNode - Adding Node")
                         LOGGER.debug("Zone: %s", json.dumps(zone))
             except BHyveError as err:
                 LOGGER.error("There was an error in load_timers: %s", err)
@@ -125,6 +127,5 @@ class BHyveController(udi_interface.Node):
     def remove_notices_all(self, command):
         self.Notices.clear()
 
-    id = 'bhyve'
     commands = {'QUERY': query, 'REMOVE_NOTICES_ALL': remove_notices_all}
     drivers = [{'driver': 'ST', 'value': 1, 'uom': 2}]

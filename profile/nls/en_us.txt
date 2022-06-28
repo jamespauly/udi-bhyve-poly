@@ -16,7 +16,6 @@ ST-timer-GV4-NAME = Freeze Temp
 ST-timer-GV5-NAME = Total Zones
 ST-timer-GV6-NAME = Active Zones
 ST-timer-GV7-NAME = Current Watering Status
-ST-timer-ST-NAME = Current Watering Status
 
 # Zone Node
 ND-zonenode-NAME = BHyve Zone Node
