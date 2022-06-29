@@ -16,7 +16,7 @@
         </cmds>
     </nodeDef>
     <!-- Acurite Master -->
-    <nodeDef id="timernode" nls="time">
+    <nodeDef id="timernode" nls="timer">
         <editors/>
         <sts>
             <st id="GV7" editor="I_RUN_MODE"/>
