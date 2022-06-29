@@ -20,7 +20,7 @@
     {
       "title": "BHyve: A Node Server for retrieving BHyve Data",
       "author": "James Paul",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "date": "June 23rd, 2022",
       "source": "https://github.com/jamespauly/udi-bhyve-poly.git",
       "license": "https://github.com/jamespauly/udi-bhyve-poly/blob/main/LICENSE"
