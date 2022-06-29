@@ -103,7 +103,7 @@ class BHyveController(udi_interface.Node):
                         LOGGER.info("TimerNode - The Node Already Exist - Updating")
                     else:
                         self.poly.addNode(
-                            TimerNode(self.poly, self.address, device['reference'], device['name'], device))
+                            TimerNode(self.poly, device['reference'], device['reference'], device['name'], device))
                         LOGGER.info("TimerNode - Adding Node")
                     LOGGER.info("Device: %s", json.dumps(device))
                     for zone in device['zones']:
